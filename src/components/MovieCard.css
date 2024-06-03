@@ -5,6 +5,7 @@
     /* max-width: 500px; */
     gap: 10px;
     margin: 10px 10px;
+    cursor: pointer; 
 }
 .card-box:last-child{
     flex-grow: 10;
