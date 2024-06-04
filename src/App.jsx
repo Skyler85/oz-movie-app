@@ -1,71 +1,71 @@
 import './App.css';
-import MovieCard from './components/MovieCard';
-import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Routes, Route, Outlet, useNavigate } from 'react-router-dom';
 import axios from './api/axios';
 import requests from './api/requests';
+
 import NavBar from './components/NavBar';
+import MovieCard from './components/MovieCard';
+import MovieDetail from './components/MovieDetail';
 import Signup from './components/Signup';
 import Login from './components/Login';
-import MovieDetail from './components/MovieDetail';
 
 function App() {
   const navigate = useNavigate();
-  const [movies, setMovies] = useState([]);
-  const [paramsId, setParamsId] = useState('');
-
-  const fetchMovieData = useCallback(async () => {
-    const response = await axios.get(requests.fetchPopular, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
-      },
-    });
-    const results = await response.data.results;
-    setMovies(results);
-  }, [requests.fetchPopular]);
+  const [movies, setMovies] = useState(null);
 
   useEffect(() => {
-    fetchMovieData();
-  }, [fetchMovieData]);
+    async function fetchData() {
+      const response = await axios.get(requests.fetchPopular, {
+        method: 'GET',
+        // params: { language: 'en-US', page: '1' },
+        headers: {
+          accept: 'application/json',
+          Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
+        }
 
-  const handleClick = (id) => {
-    setParamsId(id);
-    navigate('detail/' + paramsId);
-  };
+      });
+      const movieData = response.data.results
+      console.log(movieData)
+      setMovies(movieData);
+    }
+    fetchData();
+  },[]);
 
   return (
-    <Routes>
-      <Route path='/' element={<Layout />}>
-        <Route
-          index
-          element={
-            <>
-              {/* <MovieBanner /> */}
+    <>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route
+            index
+            element={
               <div className='container'>
-                <ul>
-                  {movies.map((movie) => {
-                    return (
-                      <>
-                        <li onClick={() => handleClick(movie.id)} key={movie.id} className='card-box'>
+                <ul className='card-box'>
+                {movies ? (
+                    movies.map((movie) => {
+                      return (
+                        <li key={movie.id} onClick={() => navigate(`/detail/${movie.id}`)} >
                           <MovieCard movie={movie} />
                         </li>
-                      </>
-                    );
-                  })}
+                      );
+                    })
+                  ) : (
+                    <div>Loading...</div> // 로딩 중일 때 표시할 내용
+                  )}
                 </ul>
               </div>
-            </>
-          }
-        />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/detail/:id' element={<MovieDetail />} />
-      </Route>
-    </Routes>
+            }
+          />
+          <Route path='/detail/:id' element={<MovieDetail />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+        </Route>
+      </Routes>
+      {/* <MovieBanner /> */}
+    </>
   );
 }
+
 const Layout = () => {
   return (
     <>
