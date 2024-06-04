@@ -12,7 +12,8 @@
 }
 
 .card-box img {
-    min-width: 100%;
+    width: 100%;
+    max-width: 300px;
     max-height: 100%;
     object-fit: cover;
     vertical-align: bottom;

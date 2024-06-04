@@ -1,0 +1,32 @@
+.signup-box {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-weight: 800;
+}
+
+.signup-box input{
+  margin: auto 0;
+  font-size: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid transparent;
+  border-bottom: 1px solid lightgray;
+  border-radius: 5px;
+  display: block;
+  width: 300px;
+  font-size: 16px;
+  padding: 5px;
+}
+.signup-box p span {
+  color: red;
+}
+.signup-box button {
+  padding: 15px;
+  border: 0px;
+  border-radius: 15px;
+  background-color: lightseagreen;
+  color: white;
+  font-size: 20px;
+  letter-spacing: 2px;
+}

@@ -1,4 +1,9 @@
 .container {
+  display:flex;
+  height: 100%;
+}
+
+.container ul {
   display: flex;
   flex-wrap: wrap;
 }
