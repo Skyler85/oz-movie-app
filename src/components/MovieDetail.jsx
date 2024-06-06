@@ -1,5 +1,4 @@
 import './MovieDetail.css';
-import movieDetailData from '../data/movieDetailData.json';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from '../api/axios';
@@ -17,6 +16,7 @@ const MovieDetail = () => {
       try {
         const response = await axios.get(`/movie/${movieId}`);
         setMovie(response.data);
+        console.log(response);
       } catch (error) {
         console.log(error);
       } finally {
@@ -26,7 +26,7 @@ const MovieDetail = () => {
     fetchData();
   }, [movieId]);
   
-  if (!movie) return <div>데이터를 불러오는 중입니다.</div>; // 로딩중인 경우 표시
+  if (loading) return <div>데이터를 불러오는 중입니다.</div>; // 로딩중인 경우 표시
 
   const handleGoBack = (e) => {
     navigate(-1);

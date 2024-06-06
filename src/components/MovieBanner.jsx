@@ -1,49 +1,32 @@
-import { useNavigate } from 'react-router-dom';
-import movieData from '../data/movieListData.json';
 import './MovieBanner.css'
+import { Swiper, SwiperSlide } from 'swiper/react'
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/bundle'
+import 'swiper/css/autoplay'
+import axios from '../api/axios';
+import requests from '../api/requests'
 
 const MovieBanner = () => {
-    const movies = movieData.results
-    const movieDataArray = () => {
-        movies.map((movie) => {
-            title: movie.title;
-            id: movie.id;
-            poster_path: movie.poster_path;
-            backdrop_path: movie.backdrop_path;
-            vote_average: movie.vote_average;
-            overview: movie.overview;
-        },[])
-    }
-    console.log(movies)
-    console.log(movieDataArray())
+    const fetchData = async () => {
+        const response = await  axios.get(`${requests.fetchNowPlaying}`)
+        console.log(response.data.results)
 
-    const navigate = useNavigate()
-
-    const handleClick = (e) => {
-        navigate('/detail')
     }
-    const movePrev = (e) => {
-        e.preventDefault()
-        
-    }
-    const moveNext = (e) => {
-        e.preventDefault()
-    }
+    fetchData()
 
     return (
-        <div className='slider'>
-        <div className='slider-inner'></div>
-            {movies.map((movie) => {
-                return (
-                    <div key={movie.id} onClick={handleClick} className='slide'>
-                        <img id='slider-image' src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt={movie.title} />
-                        <h3>{movie.title}</h3>
-                    </div>
-                );
-            })}
-            <button className='left-btn'>〈</button>
-            <button className='right-btn'>〉</button>
-        </div>
+        <Swiper
+          spaceBetween={50}
+          slidesPerView={3}
+          onSlideChange={() => console.log('slide change')}
+          onSwiper={(swiper) => console.log(swiper)}
+        >
+            <SwiperSlide>Slide 1</SwiperSlide>
+            <SwiperSlide>Slide 2</SwiperSlide>
+            <SwiperSlide>Slide 3</SwiperSlide>
+            <SwiperSlide>Slide 4</SwiperSlide>
+        </Swiper>
     );
 };
 

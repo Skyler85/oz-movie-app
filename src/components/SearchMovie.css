@@ -1,0 +1,24 @@
+.search-box {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  gap: 10px;
+  margin: 0 auto;
+  cursor: pointer;
+  list-style: none;
+  padding: 0 20px;
+  justify-content: center;
+}
+.search-box li img {
+  object-fit: cover;
+  vertical-align: bottom;
+  border-radius: 5px;
+  max-height: 200px;
+}
+
+@media screen and (max-width: 480px) {
+  .search-box li img {
+    width: 100%;
+    max-height: none;
+  }
+}

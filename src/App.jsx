@@ -9,6 +9,8 @@ import MovieCard from './components/MovieCard';
 import MovieDetail from './components/MovieDetail';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import SearchMovie from './components/SearchMovie';
+import MovieBanner from './components/MovieBanner';
 
 function App() {
   const navigate = useNavigate();
@@ -16,17 +18,9 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(requests.fetchPopular, {
-        method: 'GET',
-        // params: { language: 'en-US', page: '1' },
-        headers: {
-          accept: 'application/json',
-          Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
-        }
-
-      });
+      const response = await axios.get(requests.fetchPopular);
       const movieData = response.data.results
-      console.log(movieData)
+      console.log("Loaded from the movie information server.")
       setMovies(movieData);
     }
     fetchData();
@@ -40,10 +34,12 @@ function App() {
             index
             element={
               <div className='container'>
+                <MovieBanner />
                 <ul className='card-box'>
                 {movies ? (
                     movies.map((movie) => {
                       return (
+
                         <li key={movie.id} onClick={() => navigate(`/detail/${movie.id}`)} >
                           <MovieCard movie={movie} />
                         </li>
@@ -57,6 +53,7 @@ function App() {
             }
           />
           <Route path='/detail/:id' element={<MovieDetail />} />
+          <Route path='/search' element={<SearchMovie />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
         </Route>
