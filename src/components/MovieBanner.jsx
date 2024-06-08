@@ -1,4 +1,4 @@
-import './MovieBanner.css'
+import '../style/MovieBanner.css'
 import { Swiper, SwiperSlide } from 'swiper/react'
 // Import Swiper styles
 import 'swiper/css'
@@ -10,7 +10,7 @@ import requests from '../api/requests'
 const MovieBanner = () => {
     const fetchData = async () => {
         const response = await  axios.get(`${requests.fetchNowPlaying}`)
-        console.log(response.data.results)
+        // console.log(response.data.results)
 
     }
     fetchData()
@@ -20,7 +20,7 @@ const MovieBanner = () => {
           spaceBetween={50}
           slidesPerView={3}
           onSlideChange={() => console.log('slide change')}
-          onSwiper={(swiper) => console.log(swiper)}
+        //   onSwiper={(swiper) => console.log(swiper)}
         >
             <SwiperSlide>Slide 1</SwiperSlide>
             <SwiperSlide>Slide 2</SwiperSlide>

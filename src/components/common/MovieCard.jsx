@@ -1,5 +1,5 @@
-import './MovieCard.css';
-import { imageBasePath } from '../constant';
+import '../../style/MovieCard.css';
+import { imageBasePath } from '../../constant';
 
 const MovieCard = ({ movie }) => {
   // console.log(movie);

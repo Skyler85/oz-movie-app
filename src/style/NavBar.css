@@ -1,0 +1,111 @@
+.nav {
+  width: 100vw;
+  height: 80px;
+  top: 0;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  background-color: var(--nav-background-color);
+}
+
+.nav__img {
+  height: auto;
+  width: 60px;
+}
+.btn-box {
+  display: flex;
+  align-items: center;
+}
+.user-avatar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  cursor: pointer;
+}
+.user-select {
+  visibility: hidden;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+.user-avatar:hover .user-select {
+  visibility: visible; /* user-avatar에 hover 시 보임 */
+}
+.user-avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  border: none;
+}
+.user-select a {
+  display: block;
+  padding: 10px 15px;
+  color: white;
+  font-weight: 500;
+}
+.user-select a:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+}
+.searchInput {
+  font-size: 16px;
+  padding: 10px 20px;
+  width: 300px;
+  border-radius: 5px;
+  border: 1px solid var(--input-border-color);
+  background-color: transparent;
+  color: var(--input-text-color);
+  transform: translateX(5%);
+  letter-spacing: 1.2px;
+}
+
+.nav button {
+  padding: 15px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid var(--button-border-color);
+  background-color: var(--button-background-color);
+  color: var(--button-text-color);
+  font-weight: 600;  
+}
+
+@media (max-width: 768px) {
+  .nav {
+    height: 80px;
+    padding: 20px;
+  }
+
+  .searchInput {
+    display: none;
+  }
+
+  .nav button {
+    height: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav {
+    padding: 15px;
+  }
+
+  .nav__img {
+    width: 50px;
+  }
+
+  .nav button {
+    padding: 10px 15px;
+  }
+  .searchInput {
+    display: hidden;
+  }
+  .user-avatar span {
+    visibility: hidden;
+  }
+}

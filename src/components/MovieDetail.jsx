@@ -1,4 +1,4 @@
-import './MovieDetail.css';
+import '../style/MovieDetail.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from '../api/axios';
@@ -44,11 +44,11 @@ const MovieDetail = () => {
         </div>
         <div className='detail__genre'>
           {movie.genres.map((genre) => {
-            return <button className='genre-btn'>{genre.name}</button>;
+            return <button key={genre.name} className='genre-btn'>{genre.name}</button>;
           })}
         </div>
         <div className='detail__overview'>{movie.overview}</div>
-        <div className='home-link'>
+        <div className='back-btn'>
           <button onClick={handleGoBack}>〈</button>
         </div>
       </div>

@@ -2,6 +2,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  text-decoration: none;
+  color: darkslategray;
 }
 *:focus {
   outline: 'none';
@@ -13,4 +15,20 @@ body {
 }
 #root {
   height:100vh;
+}
+:root {
+  /* Light Ver */
+  
+  /* background */
+  --nav-background-color: white;
+
+  /* input style */
+  --input-border-color: darkslategray;
+  --input-text-color: darkslategray;
+
+  /* button style */
+  --button-border-color: white;
+  --button-background-color: goldenrod;
+  --button-text-color: white;
+
 }

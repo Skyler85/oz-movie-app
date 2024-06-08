@@ -1,9 +1,9 @@
+import '../style/SearchMovie.css'
 import React, { useEffect, useState } from 'react';
 import { useDebounce } from '../hooks/debounce';
 import axios from '../api/axios';
 import { imageBasePath } from '../constant';
 import { useNavigate } from 'react-router-dom';
-import './SearchMovie.css'
 const SearchMovie = () => {
   const navigate = useNavigate()
   const [searchResult, setSearchResult] = useState([]);
@@ -24,7 +24,7 @@ const debounceSearchTerm = useDebounce(searchTerm, 500);
     try {
       const response = await axios.get(`/search/movie?query=${searchTerm}&include_adult=false`);
       setSearchResult(response.data.results);
-      console.log(response.data.results);
+      // console.log(response.data.results);
     } catch (error) {
       console.log(error);
     }
@@ -37,7 +37,7 @@ const debounceSearchTerm = useDebounce(searchTerm, 500);
       <ul className='search-box'>
         {searchResult.length > 0 ? (
           searchResult.map((movie) => (
-            <li key={movie.id} onClick={() => navigate(`/detail/${movie.id}`)}>
+            <li key={movie.id} onClick={() => navigate(`/search/detail/${movie.id}`)}>
               {movie.backdrop_path || movie.poster_path ? (
                 <>
                   <img src={`${imageBasePath}${movie.backdrop_path || movie.poster_path}`} alt={movie.title} />

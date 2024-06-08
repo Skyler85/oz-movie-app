@@ -1,8 +1,9 @@
 .detail-container {
     width: 90%;
+    height: calc(100% - 101px);
     margin: 0 auto;
     display: flex;
-    height: 100%;
+    /* height: 100%; */
     position: relative;
 }
 .img-box {
@@ -10,8 +11,9 @@
     height: 100%;
 }
 .detail__img {
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: calc(100% - 102px)
     object-fit: cover;
 }
 
@@ -48,15 +50,15 @@
     letter-spacing: 2px;
     line-height: 30px;
 }
-.home-link{
+.back-btn{
     position: absolute;
     top: 10px;
     left: 10px;
 }
-.home-link button{
+.back-btn button{
     padding: 10px 20px;
     font-size: 20px;
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.3);
     cursor: pointer;
     border: 2px solid black;
     color: black;
