@@ -1,15 +1,14 @@
 import '../../style/NavBar.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { AuthContext } from '../../api/authContext';
+import { logout, subscribeToAuthChanges } from '../../auth/autoManager';
 
 const NavBar = () => {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState('');
   const [user, setUser] = useState(null);
   const context = useContext(AuthContext);
-  const auth = getAuth();
 
   const location = useLocation();
   useEffect(() => {
@@ -21,20 +20,17 @@ const NavBar = () => {
 
   // 사용자 로그인 확인
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
+    const unsubscribe = subscribeToAuthChanges(setUser);
     return () => unsubscribe();
   }, []);
 
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      });
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/login');
+    } catch (error) {
+      alert('Logout failed: ', error);
+    }
   };
 
   const handleChange = (e) => {
@@ -49,9 +45,15 @@ const NavBar = () => {
       </Link>
       {user ? (
         <div>
-        <input type='text' className='searchInput' value={searchText} onChange={handleChange} placeholder='Please enter your search term' />
-      </div>
-      ) : null }
+          <input
+            type='text'
+            className='searchInput'
+            value={searchText}
+            onChange={handleChange}
+            placeholder='Please enter your search term'
+          />
+        </div>
+      ) : null}
 
       <div className='btn-box'>
         {user ? (
@@ -59,16 +61,16 @@ const NavBar = () => {
             <div className='user-avatar'>
               <span>반갑습니다, {user.displayName || '___'}님</span>
               <img src={user.photoURL || '/defaultUserAvatar.png'} alt='avatar' />
-            <div className='user-select'>
-              <p>
-                <Link to='/user'>마이페이지</Link>
-              </p>
-              <p>
-                <Link to='/login' onClick={handleLogout}>
-                  로그아웃
-                </Link>
-              </p>
-            </div>
+              <div className='user-select'>
+                <p>
+                  <Link to='/user'>마이페이지</Link>
+                </p>
+                <p>
+                  <Link to='/login' onClick={handleLogout}>
+                    로그아웃
+                  </Link>
+                </p>
+              </div>
             </div>
           </>
         ) : (

@@ -2,7 +2,7 @@ import '../style/SearchMovie.css'
 import React, { useEffect, useState } from 'react';
 import { useDebounce } from '../hooks/debounce';
 import axios from '../api/axios';
-import { imageBasePath } from '../constant';
+import { buildImageUrl } from '../util/constant';
 import { useNavigate } from 'react-router-dom';
 const SearchMovie = () => {
   const navigate = useNavigate()
@@ -40,7 +40,7 @@ const debounceSearchTerm = useDebounce(searchTerm, 500);
             <li key={movie.id} onClick={() => navigate(`/search/detail/${movie.id}`)}>
               {movie.backdrop_path || movie.poster_path ? (
                 <>
-                  <img src={`${imageBasePath}${movie.backdrop_path || movie.poster_path}`} alt={movie.title} />
+                  <img src={buildImageUrl(movie.backdrop_path || movie.poster_path)} alt={movie.title} />
                   <h3>{movie.title}</h3>
                   <p>⭐️ {movie.vote_average}</p>
                 </>

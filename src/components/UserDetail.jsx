@@ -24,7 +24,7 @@ const UserDetail = () => {
       <h1>회원정보</h1>
       <div className='user-info__box'>
         <p className='user-info__photo'>
-          <img src={user.photoURL || '/public/defaultUserAvatar.png'} />
+          <img src={user.photoURL || '/defaultUserAvatar.png'} />
           <strong>아바타</strong>
         </p>
         <hr />
