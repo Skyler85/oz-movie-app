@@ -18,18 +18,22 @@ const MovieDetail = () => {
   const handleGoBack = () => {
     navigate(-1);
   };
-  const genres = () => {
-    movieDetail.genres.map((genre) => (
-      <button key={genre.name} className='genre-btn'>
+  const genres = movieDetail.genres.map((genre) => {
+    return (
+      <button key={genre.id} className='genre-btn'>
         {genre.name}
       </button>
-    ));
-  };
+    );
+  });
 
   return (
     <div className='detail-container'>
       <div className='img-box'>
-        <img className='detail__img' src={`https://image.tmdb.org/t/p/original${movieDetail.poster_path}`} alt={movieDetail.title} />
+        <img
+          className='detail__img'
+          src={`https://image.tmdb.org/t/p/original${movieDetail.poster_path}`}
+          alt={movieDetail.title}
+        />
       </div>
       <div className='detail__info'>
         <div className='detail__head'>

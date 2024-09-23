@@ -1,33 +1,40 @@
-import '../style/MovieBanner.css'
-import { Swiper, SwiperSlide } from 'swiper/react'
-// Import Swiper styles
-import 'swiper/css'
-import 'swiper/css/bundle'
-import 'swiper/css/autoplay'
-import axios from '../api/axios';
-import requests from '../api/requests'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectFade, Navigation, Pagination } from 'swiper/modules';
+import { buildImageUrl } from '../util/constant';
+import '../style/MovieBanner.css';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
-const MovieBanner = () => {
-    const fetchData = async () => {
-        const response = await  axios.get(`${requests.fetchNowPlaying}`)
-        // console.log(response.data.results)
+const MovieBanner = ({ nowMovies }) => {
+  console.log(nowMovies);
+  if (!nowMovies) return null;
 
-    }
-    fetchData()
-
-    return (
-        <Swiper
-          spaceBetween={50}
-          slidesPerView={3}
-          onSlideChange={() => console.log('slide change')}
-        //   onSwiper={(swiper) => console.log(swiper)}
-        >
-            <SwiperSlide>Slide 1</SwiperSlide>
-            <SwiperSlide>Slide 2</SwiperSlide>
-            <SwiperSlide>Slide 3</SwiperSlide>
-            <SwiperSlide>Slide 4</SwiperSlide>
-        </Swiper>
-    );
+  return (
+    <Swiper
+      navigation={true}
+      pagination={true}
+      modules={[Navigation, Pagination, EffectFade]}
+      effect='fade'
+      className='mySwiper'
+    >
+      {nowMovies &&
+        nowMovies.map((item) => (
+          <SwiperSlide key={item.id}>
+            <img src={buildImageUrl(item.backdrop_path)} />
+            <div className='banner-container'>
+              <p className='banner__title'>
+                {item.title} {' '}
+              <span className='banner__original-title'>
+                {item.original_language === 'ko' ? '' : item.original_title}
+              </span>
+              </p>
+              <p className='banner__descript'>{item.overview}</p>
+            </div>
+          </SwiperSlide>
+        ))}
+    </Swiper>
+  );
 };
 
 export default MovieBanner;
