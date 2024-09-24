@@ -34,12 +34,13 @@
   position: absolute;
   top: 50px;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
 }
 
 .user-avatar:hover .user-select {
   visibility: visible;
+  z-index: 50;
   /* user-avatar에 hover 시 보임 */
 }
 
@@ -58,7 +59,7 @@
 }
 
 .user-select a:hover {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(255, 255, 255, 0.3);
   border-radius: 10px;
 }
 

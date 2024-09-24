@@ -33,15 +33,18 @@
 }
 
 .banner__title {
+    cursor: pointer;
     margin-bottom: 20px;
     font-weight: 800;
     font-size: 32px;
     color: #fff;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
-.banner__original-title{
+
+.banner__original-title {
     font-size: 24px;
 }
+
 .banner__descript {
     font-size: 18px;
     color: #fff;
@@ -52,4 +55,24 @@
     width: 100vw;
     height: auto;
     position: relative;
+}
+
+@media (max-width: 768px) {
+    .banner__title {
+        font-size: 24px;
+    }
+
+    .banner__original-title {
+        font-size: 18px;
+    }
+
+    .banner__descript {
+        display: none;
+    }
+    .banner-container{
+        left: 20px;
+        bottom: 20px;
+        margin-right: 20px;
+    }
+
 }

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import MovieBanner from './MovieBanner'
-import MovieCard from './common/MovieCard'
+import React, { useEffect, useState } from 'react';
+import MovieBanner from './MovieBanner';
+import MovieCard from './common/MovieCard';
 import { useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
 import requests from '../api/requests';
 
-const MovieList = ({movies}) => {
+const MovieList = ({ movies }) => {
   const navigate = useNavigate();
   const [nowMovies, setNowMovies] = useState(null);
 
@@ -19,20 +19,21 @@ const MovieList = ({movies}) => {
 
   return (
     <div className='container'>
-    <MovieBanner nowMovies={nowMovies} />
-    <ul className='card-box'>
-      {movies ? (
-        movies.map((movie) => (
-          <li key={movie.id} onClick={() => navigate(`/detail/${movie.id}`)}>
-            <MovieCard movie={movie} />
-          </li>
-        ))
-      ) : (
-        <div>Loading...</div>
-      )}
-    </ul>
-  </div>
-  )
-}
+      <MovieBanner nowMovies={nowMovies} />
+      <ul className='card-box'>
+        {movies ? (
+          movies.map((movie) => (
+            <li key={movie.id} onClick={() => navigate(`/detail/${movie.id}`)}>
+              <MovieCard movie={movie} />
+            </li>
+          ))
+        ) : (
+          <div>Loading...</div>
+        )}
+      </ul>
+      <div id='footer' style={{height: '50px', backgroundColor: '#ccc', marginTop: '50px'}}> </div>
+    </div>
+  );
+};
 
-export default MovieList
+export default MovieList;

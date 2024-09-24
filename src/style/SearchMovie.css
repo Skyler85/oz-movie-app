@@ -16,6 +16,10 @@
   max-height: 200px;
 }
 
+.search-box h3 {
+  white-space: pre-wrap;
+  max-width: 355px;
+}
 @media screen and (max-width: 480px) {
   .search-box li img {
     width: 100%;
